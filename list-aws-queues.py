@@ -11,18 +11,14 @@ from boto.exception import SQSError
 import sys
 
 # Get the keys from a specific url and then use them to connect to AWS Service
-print ("Boto Vrsion"+boto.Version)
+
 
 req = urllib2.urlopen('http://ec2-52-30-7-5.eu-west-1.compute.amazonaws.com:81/key')
 req = req.read()
-key = req.split(":")
+access,key = req.split(":")
 
-access_key_id = "[0]"
-secret_access_key = "[1]"
-
-print("ID:" +key[0])
-print("\n" +key[1])
-
+access_key_id = access
+secret_access_key = key
 
 # Set up a connection to the AWS service.
 conn = boto.sqs.connect_to_region("eu-west-1", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key)
